@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>麻煩均的專屬二日遊行程</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #ece4da; 
+            --card-bg: #ffffff;      
+            --line-color: #afc3c3;   
+            --accent-color: #8c7662; 
+            --text-main: #2c2926;    
+            --text-sub: #5a544e;     
+        }
+
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-main);
+        }
+
+        body { display: flex; justify-content: center; }
+
+        .timeline-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 10px;
+            position: relative;
+            box-sizing: border-box; 
+        }
+
+        .header { padding-left: 45px; margin-bottom: 30px; }
+        .header h1 { font-size: 1.8rem; margin: 0; }
+        .header p { color: var(--text-sub); margin-top: 5px; font-weight: 300; }
+
+        .day-selector {
+            display: flex; gap: 10px;
+            padding-left: 45px; margin-bottom: 40px;
+            overflow-x: auto;
+        }
+        .day-selector::-webkit-scrollbar { display: none; }
+        .day-btn {
+            padding: 8px 20px;
+            background-color: rgba(140, 118, 98, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            color: var(--accent-color);
+            font-size: 0.9rem; font-weight: 700;
+            cursor: pointer; white-space: nowrap; transition: 0.3s;
+        }
+        .day-btn.active { background-color: var(--accent-color); color: white; }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 30px; top: 0; bottom: 0;
+            width: 6px;
+            background-color: var(--line-color);
+            z-index: 0;
+        }
+
+        .itinerary-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 45px;
+            z-index: 1;
+            display: none; /* 預設全部隱藏 */
+        }
+        
+        /* 讓有 active class 的行程顯示出來 */
+        .itinerary-item.active { display: block; }
+
+        .itinerary-item::before {
+            content: '';
+            position: absolute;
+            left: 14px; top: 5px;
+            width: 12px; height: 12px;
+            background-color: var(--card-bg);
+            border: 3px solid var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .time { font-size: 0.85rem; color: var(--accent-color); font-weight: 700; margin-bottom: 10px; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .location { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+        .description { font-size: 0.95rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 15px; }
+
+        .image-scroller {
+            display: flex !important; 
+            gap: 12px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+        }
+        .image-scroller::-webkit-scrollbar { display: none; }
+        .image-scroller img {
+            flex: 0 0 85%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 14px;
+            background-color: #e5e0d8;
+        }
+
+        .nav-link { display: inline-flex; align-items: center; color: var(--accent-color); text-decoration: none; font-weight: 700; }
+        .nav-link i { margin-right: 6px; }
+    </style>
+</head>
+<body>
+
+    <div class="timeline-container">
+        <header class="header">
+            <h1>府城・二日慢旅</h1>
+            <p>2026.01.24 ・ 麻煩均的專屬二日遊</p>
+        </header>
+
+        <div class="day-selector">
+            <div class="day-btn active" onclick="showDay(1)">DAY 01</div>
+            <div class="day-btn" onclick="showDay(2)">DAY 02</div>
+        </div>
+
+        
+        <div class="itinerary-item day1 active"> 
+            <div class="time">11:30 PM</div>
+            <div class="card">
+                <div class="location">第一站：Morso</div>
+                <div class="description">正統義式薄餅三明治專賣店。</div>
+                <div class="image-scroller">
+                    <img src="pic/8.jpg">
+                    <img src="pic/7.jpg">
+                    <img src="pic/9.jpg">
+                                    </div>
+                <a href="https://maps.app.goo.gl/UhiWJiG83E7BtK4P7" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+        <div class="itinerary-item day1 active"> 
+            <div class="time">12:30 PM</div>
+            <div class="card">
+                <div class="location">第二站：bibi pancake</div>
+                <div class="description">超級好吃的草莓鐵鍋鬆餅。</div>
+                <div class="image-scroller">
+                    <img src="pic/4.jpg">
+                    <img src="pic/5.png">
+                                    </div>
+                <a href="https://maps.app.goo.gl/NuXH7yhFF6kCdmMu8" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+
+                    <div class="itinerary-item day1 active"> 
+            <div class="time">12:30 PM</div>
+            <div class="card">
+                <div class="location">第三站：司法博物館</div>
+                <div class="description">我要把陳映均大壞蛋抓去關啦。</div>
+                <div class="image-scroller">
+                    <img src="pic/10.jpg">
+                    <img src="pic/12.jpg">
+                                    </div>
+                <a href="https://maps.app.goo.gl/XwUK78LZCSTnRSkK6" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+                        <div class="itinerary-item day1 active"> 
+            <div class="time">12:30 PM</div>
+            <div class="card">
+                <div class="location">第四站：小西腳青草茶</div>
+                <div class="description">均來台南一定要買的❤️。</div>
+                <div class="image-scroller">
+                    <img src="pic/1.jpeg">
+                    <img src="pic/6.jpg">
+                                    </div>
+                <a href="https://maps.app.goo.gl/wnhhRa3o1yFRW8PF8" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+
+        <div class="itinerary-item day1 active"> 
+            <div class="time">18:00 AM</div>
+            <div class="card">
+                <div class="location">第五站：洛屋</div>
+                <div class="description">全台灣最好吃的煽系味噌牛骨拉麵。</div>
+                <div class="image-scroller">
+                    <img src="pic/1.jpg">
+                    <img src="pic/2.jpg">
+                    <img src="pic/3.jpg">
+                </div>
+                <a href="https://maps.app.goo.gl/W15m4hTgS6QTEe7x5" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+        <div class="itinerary-item day2"> 
+            <div class="time">11:00 AM</div>
+            <div class="card">
+                <div class="location">你就去找你朋友</div>
+                <div class="description">哼。</div>
+                <div class="image-scroller">
+                    <img src="pic/6.png">
+                </div>
+                <a href="https://maps.app.goo.gl/SXjuxQSeb7BaBx1D7" target="_blank" class="nav-link">
+                    <i class="fas fa-location-dot"></i> 開啟地圖導航
+                </a>
+            </div>
+        </div>
+
+
+
+    </div> <script>
+        function showDay(dayNum) {
+            // 1. 切換按鈕 active 樣式
+            const btns = document.querySelectorAll('.day-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            // 抓取當前點擊的按鈕（修正原本 event 可能抓錯的問題）
+            event.currentTarget.classList.add('active');
+
+            // 2. 顯示對應天數的行程
+            const allItems = document.querySelectorAll('.itinerary-item');
+            allItems.forEach(item => {
+                // 先隱藏所有行程
+                item.classList.remove('active');
+                
+                // 如果該行程帶有對應的 class (例如 day1, day2)，就讓它顯示
+                if (item.classList.contains('day' + dayNum)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
